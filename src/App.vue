@@ -1,19 +1,22 @@
 <template>
   <v-app>
     <v-main>
-      <HelloWorld/>
+      <admin-panel/>
+      <durban-button text="Seitenelement erstellen" postbackurl="/test"/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import AdminPanel from './components/adminPanel';
+import DurbanButton from "@/components/durbanButton";
 
 export default {
   name: 'App',
 
   components: {
-    HelloWorld,
+    DurbanButton,
+    AdminPanel,
   },
 
   data: () => ({
