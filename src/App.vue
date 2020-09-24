@@ -2,7 +2,10 @@
   <v-app>
     <v-main>
       <admin-panel/>
-      <durban-button text="Seitenelement erstellen" postbackurl="/test"/>
+      <durban-button text="Seitenelement erstellen"
+                     postbackurl='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("
+                     mp$ContentZone$ctl49
+      ", "", false, "", "/editor/pageitem/new/0/default/", false, true))'/>
     </v-main>
   </v-app>
 </template>
