@@ -34,7 +34,7 @@
     >
       <v-divider v-if="item.divider"/>
 
-      <v-list-item class="py-0" v-else link @click.prevent="openUrl(item.url, item.target)">
+      <v-list-item class="py-0" v-else link @click.prevent="openUrl(item.url, item.urlType)">
         <v-list-item-icon class="mr-4">
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     openUrl(url, target) {
-      const urlTarget = target ? target : "_self"
+      const urlTarget = target == 'newWindow' ? "_blank" : "_self"
       window.open(url, urlTarget);
     },
     doPostback: function () {
