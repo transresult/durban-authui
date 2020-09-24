@@ -82,6 +82,12 @@ export default {
       }],
     }
   },
+  // computed: {
+  //   enableNavHover: function () {
+  //     if (!this.$vuetify) return;
+  //     return this.$vuetify.breakpoint.lgAndDown
+  //   }
+  // },
   methods: {
     openUrl(url, target) {
       const urlTarget = target == 'newWindow' ? "_blank" : "_self"

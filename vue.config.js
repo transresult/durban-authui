@@ -3,7 +3,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
     configureWebpack: {
-        mode: "development",
+        mode: "production",
         optimization: {
             minimize: true,
             minimizer: isProd ? [
