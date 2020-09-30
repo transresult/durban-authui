@@ -34,17 +34,34 @@
           v-for="(item, index) in navitems"
           :key="index"
       >
-        <v-divider v-if="item.divider"/>
-
-        <v-list-item v-else link @click.prevent="openUrl(item)">
+        <v-list-item v-if="item.icon" link @click.prevent="openUrl(item)">
           <v-list-item-icon class="mr-4">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
           <v-list-item-title>{{ item.text }}</v-list-item-title>
         </v-list-item>
 
+        <v-divider v-else-if="item.divider"/>
+        <v-subheader v-else-if="item.subheader">{{ item.subheader }}</v-subheader>
+
       </v-list>
     </v-navigation-drawer>
+
+    <v-sheet id="iframe-window" v-if="dialogIframe">
+      <v-card>
+        <v-card-title class="py-0">
+          {{ dialogTitle }}
+          <v-btn icon absolute right @click="dialogIframe = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-card-text>
+          <v-container class="pa-0" style="height: 75vh">
+            <iframe :src="dialogUrl" width="100%" height="100%"></iframe>
+          </v-container>
+        </v-card-text>
+      </v-card>
+    </v-sheet>
 
     <!--    <v-dialog-->
     <!--        v-model="dialogIframe"-->
@@ -86,49 +103,11 @@ export default {
       mini: true,
       navitems: [
         {
-          "icon": "mdi-playlist-edit",
-          "text": "Sitemap",
-          "url": "/editor/cud_sitemap.aspx",
-          "urlType": "newWindow"
-        }, {
-          "divider": true
-        }, {
-          "icon": "mdi-account-multiple",
-          "text": "Usermanagement",
-          "url": "/editor/usermanage.aspx"
-        }, {
-          "icon": "mdi-wallpaper",
-          "text": "Bild bereitstellen",
-          "url": "/editor/cud_pic.aspx",
-          "urlType": "newWindow"
-        }, {
-          "icon": "mdi-key",
-          "text": "Kennwort ändern",
-          "url": "/login.aspx"
-        }, {
-          "icon": "mdi-cog", "text": "Einstellungen", "url": "/editor/settings/"
-        }, {
           "icon": "mdi-power",
           "text": "Abmelden",
           "url": "javascript:__doPostBack('mp$AdminPanel$LogOnStatus$ctl00','')"
         }
       ],
-      user: {
-        "UserName": "redaktion",
-        "ProviderUserKey": "30a18bdf-e2b5-4c40-9897-16b136ddbb14",
-        "Email": "redaktion@transresult.de",
-        "PasswordQuestion": null,
-        "Comment": "",
-        "IsApproved": true,
-        "IsLockedOut": false,
-        "LastLockoutDate": "1754-01-01T01:00:00+01:00",
-        "CreationDate": "2020-09-23T14:07:31+02:00",
-        "LastLoginDate": "2020-09-28T09:14:34.59+02:00",
-        "LastActivityDate": "2020-09-28T12:28:02.327+02:00",
-        "LastPasswordChangedDate": "2020-09-23T14:07:31+02:00",
-        "IsOnline": true,
-        "ProviderName": "WieLeichtSqlMembershipProvider"
-      },
     }
   },
   computed: {
@@ -138,27 +117,54 @@ export default {
   },
   methods: {
     openUrl(item) {
-      const urlTarget = item.urlType == "newWindow" || item.urlType == "iframe" ? "_blank" : "_self"
-      window.open(item.url, urlTarget);
+      // const urlTarget = item.urlType == "newWindow" || item.urlType == "iframe" ? "_blank" : "_self"
+      // window.open(item.url, urlTarget);
 
-      // if (item.urlType == "newWindow" || item.urlType == "iframe") {
-      //   this.dialogUrl = item.url
-      //   this.dialogTitle = item.text
-      //   this.dialogIframe = true
-      // } else {
-      //   window.open(item.url, item.urlType);
-      // }
+      if (item.urlType == "newWindow" || item.urlType == "iframe") {
+        if (this.dialogIframe) return;
+        console.log("Open external")
+        this.dialogUrl = item.url
+        this.dialogTitle = item.text
+        this.dialogIframe = true
+      } else {
+        window.open(item.url, item.urlType);
+      }
     },
     doPostback: function () {
       __doPostBack('mp$login$ctl00', '');
-    }
+    },
   },
   mounted() {
+    // this.navitems = [{
+    //   "icon": "mdi-playlist-edit",
+    //   "text": "Sitemap",
+    //   "url": "/editor/cud_sitemap.aspx",
+    //   "urlType": "newWindow"
+    // }, {"divider": true}, {
+    //   "icon": "mdi-account-multiple",
+    //   "text": "Usermanagement",
+    //   "url": "/editor/usermanage.aspx"
+    // }, {
+    //   "icon": "mdi-wallpaper",
+    //   "text": "Bild bereitstellen",
+    //   "url": "/Template/editor/Bootstrap3ImageUpload.aspx",
+    //   "urlType": "iframe"
+    // }, {"icon": "mdi-key", "text": "Kennwort ändern", "url": "/login.aspx"}, {
+    //   "icon": "mdi-cog",
+    //   "text": "Einstellungen",
+    //   "url": "/editor/settings/"
+    // }, {
+    //   "icon": "mdi-power",
+    //   "text": "Abmelden",
+    //   "url": "javascript:__doPostBack('mp$AdminPanel$LogOnStatus$ctl00','')"
+    // }]
     console.log("NODE_ENV", process.env.NODE_ENV)
     if (adminpanel) {
-      this.navItems = adminpanel.navitems
+      this.navitems = adminpanel.navitems
       this.globalUsername = adminpanel.user.UserName
       this.globalEmail = adminpanel.user.Email
+    } else {
+      console.log("Global 'adminpanel' not defined.")
     }
   }
 }
@@ -173,6 +179,18 @@ export default {
   overflow: hidden;
   z-index: 10000 !important;
   background-color: white;
+}
+
+#iframe-window {
+  background-color: transparent;
+  width: 75vw;
+  height: 75vh;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 /* Overwritting Durban CSS */
