@@ -1,4 +1,4 @@
-# durban-vue-backend
+# durban-authui
 
 ## Project setup
 ```

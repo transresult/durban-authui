@@ -1,5 +1,5 @@
 <template>
-  <v-btn small @click="openUrl(postbackurl, '_self')">{{ text }}</v-btn>
+  <v-btn block small @click="openUrl(postbackurl, '_self')">{{ text }}</v-btn>
 </template>
 
 <script>
