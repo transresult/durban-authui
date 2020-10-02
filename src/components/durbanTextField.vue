@@ -29,8 +29,8 @@ export default {
   },
   methods: {},
   mounted() {
-    console.log("$attrs", this.$attrs)
-    console.log("$props", this.$props)
+    // console.log("$attrs", this.$attrs)
+    // console.log("$props", this.$props)
   }
 };
 </script>
