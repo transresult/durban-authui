@@ -2,18 +2,32 @@
   <div class="v-application v-application--is-ltr" id="app" data-app="true">
     <v-navigation-drawer
         id="mo_adminPanel"
+        class="hidden-sm-and-down"
+        height="auto"
         v-model="drawer"
         :mini-variant.sync="mini"
         :expand-on-hover="expand"
-        height="auto"
-        class="hidden-sm-and-down"
+        :right="alignRight"
         permanent
     >
-
       <template v-slot:prepend>
         <v-list dense>
+          <v-list-item v-if="alignRight" link @click.prevent="alignRight = false">
+            <v-list-item-icon>
+              <v-icon>mdi-arrow-left</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Links andocken</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item v-if="!alignRight" link @click.prevent="alignRight = true">
+            <v-list-item-icon>
+              <v-icon>mdi-arrow-right</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>Rechts andocken</v-list-item-title>
+          </v-list-item>
+
           <v-list-item two-line :style="{'padding-left': '8px'}">
-            <v-list-item-avatar v-text="userInitials" :style="{'background-color': '#9ba746', 'color': '#fff'}">
+            <v-list-item-avatar class="avatar" v-text="userInitials">
             </v-list-item-avatar>
             <v-list-item-content>
               <v-list-item-title>{{ globalUsername }}</v-list-item-title>
@@ -63,27 +77,6 @@
       </v-card>
     </v-sheet>
 
-    <!--    <v-dialog-->
-    <!--        v-model="dialogIframe"-->
-    <!--        persistent-->
-    <!--        max-width="75%"-->
-    <!--        max-heigth="75%"-->
-    <!--    >-->
-    <!--      <v-card>-->
-    <!--        <v-card-title>-->
-    <!--          {{ dialogTitle }}-->
-    <!--          <v-btn icon absolute right @click="dialogIframe = false">-->
-    <!--            <v-icon>mdi-close</v-icon>-->
-    <!--          </v-btn>-->
-    <!--        </v-card-title>-->
-    <!--        <v-card-text>-->
-    <!--          <v-content style="height: 500px">-->
-    <!--            <iframe :src="dialogUrl" width="100%" height="100%"></iframe>-->
-    <!--          </v-content>-->
-    <!--        </v-card-text>-->
-    <!--      </v-card>-->
-    <!--    </v-dialog>-->
-
   </div>
 </template>
 
@@ -101,6 +94,7 @@ export default {
       drawer: true,
       expand: true,
       mini: true,
+      alignRight: false,
       navitems: [
         {
           "icon": "mdi-power",
@@ -113,16 +107,20 @@ export default {
   computed: {
     userInitials: function () {
       return this.globalUsername.charAt(0).toUpperCase() + this.globalUsername.charAt(1).toLowerCase()
-    }
-  },
+    },
+    // cssVars() {
+    //   return {
+    //     '--navAvatarBG': typeof navAvatarBG !== "undefined" ? navAvatarBG : null,
+    //     '--navAvatarFont': typeof navAvatarFont !== "undefined" ? navAvatarFont : null
+    //   }
+    // }
+  }
+  ,
   methods: {
     openUrl(item) {
-      // const urlTarget = item.urlType == "newWindow" || item.urlType == "iframe" ? "_blank" : "_self"
-      // window.open(item.url, urlTarget);
-
-      if (item.urlType == "newWindow" || item.urlType == "iframe") {
+      if (item.urlType === "newWindow" || item.urlType === "iframe") {
         if (this.dialogIframe) return;
-        console.log("Open external")
+
         this.dialogUrl = item.url
         this.dialogTitle = item.text
         this.dialogIframe = true
@@ -135,31 +133,7 @@ export default {
     },
   },
   mounted() {
-    // this.navitems = [{
-    //   "icon": "mdi-playlist-edit",
-    //   "text": "Sitemap",
-    //   "url": "/editor/cud_sitemap.aspx",
-    //   "urlType": "newWindow"
-    // }, {"divider": true}, {
-    //   "icon": "mdi-account-multiple",
-    //   "text": "Usermanagement",
-    //   "url": "/editor/usermanage.aspx"
-    // }, {
-    //   "icon": "mdi-wallpaper",
-    //   "text": "Bild bereitstellen",
-    //   "url": "/Template/editor/Bootstrap3ImageUpload.aspx",
-    //   "urlType": "iframe"
-    // }, {"icon": "mdi-key", "text": "Kennwort ändern", "url": "/login.aspx"}, {
-    //   "icon": "mdi-cog",
-    //   "text": "Einstellungen",
-    //   "url": "/editor/settings/"
-    // }, {
-    //   "icon": "mdi-power",
-    //   "text": "Abmelden",
-    //   "url": "javascript:__doPostBack('mp$AdminPanel$LogOnStatus$ctl00','')"
-    // }]
-    console.log("NODE_ENV", process.env.NODE_ENV)
-    if (adminpanel) {
+    if (typeof adminpanel !== "undefined") {
       this.navitems = adminpanel.navitems
       this.globalUsername = adminpanel.user.UserName
       this.globalEmail = adminpanel.user.Email
@@ -175,10 +149,15 @@ export default {
 #mo_adminPanel, vuetify-nav-drawer {
   position: fixed;
   margin-top: 115px;
-  left: 0;
   overflow: hidden;
   z-index: 10000 !important;
   background-color: white;
+}
+
+/*noinspection CssUnresolvedCustomProperty*/
+#mo_adminPanel .avatar, vuetify-nav-drawer .avatar {
+  background-color: var(--navAvatarBG, #9ba746);
+  color: var(--navAvatarFont, #fff);
 }
 
 #iframe-window {
@@ -195,8 +174,8 @@ export default {
 
 /* Overwritting Durban CSS */
 
-.v-divider {
-  margin: 0;
-}
+/*.v-divider {*/
+/*  margin: 0;*/
+/*}*/
 
 </style>

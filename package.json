@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "dev": "vue-cli-service build --watch --dest dist-dev --mode development --target lib --name durban-authui ./src/web-component.js",
+    "dev": "vue-cli-service build --dest dist-dev --mode development --target lib --name durban-authui ./src/web-component.js",
     "build": "vue-cli-service build --target lib --mode production --name durban-authui ./src/web-component.js",
     "lint": "vue-cli-service lint"
   },

@@ -1,17 +1,62 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-    <!-- built files will be auto injected -->
-  </body>
+</head>
+<body>
+<noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+</noscript>
+<div id="app"></div>
+<!-- built files will be auto injected -->
+<script type="text/javascript">
+    // let navAvatarBG = "#f00"
+    // let navAvatarFont = "yellow"
+    let adminpanel = {
+        navitems: [{
+            "icon": "mdi-playlist-edit",
+            "text": "Sitemap",
+            "url": "/editor/cud_sitemap.aspx",
+            "urlType": "newWindow"
+        }, {"divider": true}, {
+            "icon": "mdi-account-multiple",
+            "text": "Usermanagement",
+            "url": "/editor/usermanage.aspx"
+        }, {
+            "icon": "mdi-wallpaper",
+            "text": "Bild bereitstellen",
+            "url": "/editor/cud_pic.aspx",
+            "urlType": "iframe"
+        }, {"icon": "mdi-key", "text": "Kennwort ändern", "url": "/login.aspx"}, {
+            "icon": "mdi-cog",
+            "text": "Einstellungen",
+            "url": "/editor/settings/"
+        }, {
+            "icon": "mdi-power",
+            "text": "Abmelden",
+            "url": "javascript:__doPostBack('mp$AdminPanel$LogOnStatus$ctl00','')"
+        }],
+        user: {
+            "UserName": "redaktion",
+            "ProviderUserKey": "30a18bdf-e2b5-4c40-9897-16b136ddbb14",
+            "Email": "redaktion@transresult.de",
+            "PasswordQuestion": null,
+            "Comment": "",
+            "IsApproved": true,
+            "IsLockedOut": false,
+            "LastLockoutDate": "1754-01-01T01:00:00+01:00",
+            "CreationDate": "2020-09-23T14:07:31+02:00",
+            "LastLoginDate": "2020-10-02T09:17:53.62+02:00",
+            "LastActivityDate": "2020-10-02T09:17:53.62+02:00",
+            "LastPasswordChangedDate": "2020-09-23T14:07:31+02:00",
+            "IsOnline": false,
+            "ProviderName": "WieLeichtSqlMembershipProvider"
+        },
+    }
+</script>
+</body>
 </html>
