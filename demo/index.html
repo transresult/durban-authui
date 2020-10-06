@@ -1,0 +1,24 @@
+<!--suppress ALL -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>durban-authui</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+    <link href="../dist/durban-authui.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+</head>
+<body>
+
+<vue-durban-button btntext="Test Button" color="red"></vue-durban-button>
+<vue-durban-text-field placeholder="test" :rules="[(value) => !!value || 'Required.']"></vue-durban-text-field>
+
+<script src="https://unpkg.com/vue"></script>
+<script src="https://unpkg.com/vuetify"></script>
+<script src="../dist/durban-authui.umd.js"></script>
+
+</body>
+</html>

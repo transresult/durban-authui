@@ -1,11 +1,9 @@
 <template>
-  <div id="Arnim Testet">
-    <v-text-field
-        v-bind="$attrs"
-        :value="value"
-        @input="$emit('input', $event)"
-    ></v-text-field>
-  </div>
+  <v-text-field
+      v-bind="parentAttrs"
+      :value="value"
+      @input="$emit('input', $event)"
+  ></v-text-field>
 </template>
 
 <script>
@@ -16,10 +14,14 @@
 // merke: wenn du keine PROPS definierist, dann werden die Parentattribute einefach an das erste Element attached
 //        dieses Verhaltne kann mit inheritAttrs=false deaktivert werdne (https://vuejs.org/v2/api/#inheritAttrs)
 export default {
-  inheritAttrs: false,
-  props: ['value'],
+  props: {
+    value: {
+      type: String
+    }
+  },
   data() {
     return {
+      parentAttrs: [],
       id: 'arnim',
       rules: {
         required: (value) => !!value || 'Required.',
@@ -29,8 +31,10 @@ export default {
   },
   methods: {},
   mounted() {
-    // console.log("$attrs", this.$attrs)
-    // console.log("$props", this.$props)
+    let parentElAttrs = this.$el.parentElement.attributes
+    this.parentAttrs  = Object.entries(parentElAttrs).map(item => ({[item[1].name]: item[1].value}))
+    console.log("parentAttrs", this.parentAttrs)
+    this.$slots
   }
 };
 </script>

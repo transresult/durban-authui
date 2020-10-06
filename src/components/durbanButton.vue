@@ -1,28 +1,32 @@
 <template>
-  <v-btn block small @click="openUrl(postbackurl, '_self')">{{ text }}</v-btn>
+  <div class="v-application v-application--is-ltr" id="app" data-app="true">
+    <v-btn v-bind="parentAttrs" @click="openUrl(postbackurl, '_self')">{{ btntext }}</v-btn>
+  </div>
 </template>
 
 <script>
 
 export default {
+  data: () => ({
+    parentAttrs: [],
+  }),
   props: {
-    text: {
+    btntext: {
       type: String,
-      default: "... erstellen"
-    },
-    postbackurl: {
-      type: String,
-      default: "#"
+      default: 'Button'
     }
   },
-  data: () => ({
-    //
-  }),
   methods: {
     openUrl(url, target) {
+      console.log(url)
       const urlTarget = target ? target : "_self"
       window.open(url, urlTarget);
     },
+  },
+  mounted() {
+    let parentElAttrs = this.$el.parentElement.attributes
+    this.parentAttrs  = Object.entries(parentElAttrs).map(item => ({[item[1].name]: item[1].value}))
+    console.log("parentAttrs", this.parentAttrs)
   }
 }
 </script>

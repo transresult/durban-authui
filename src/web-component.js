@@ -1,8 +1,8 @@
-import Vue from 'vue';
+import Vue              from 'vue';
 import vueCustomElement from 'vue-custom-element'
-import adminPanel from './components/adminPanel';
-import durbanButton from './components/durbanButton';
-import durbanTextField from "./components/durbanTextField";
+import adminPanel       from './components/adminPanel';
+import durbanButton     from './components/durbanButton';
+import durbanTextField  from "./components/durbanTextField";
 
 Vue.use(vueCustomElement);
 
