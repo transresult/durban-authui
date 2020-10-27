@@ -8,13 +8,16 @@
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
     <link href="../dist/durban-authui.css" rel="stylesheet">
+    <link href="http://www.kbv-beschlaege.de.stage4.trbs.biz/App_Themes/2009-kbv-kd-v2/styles.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
 </head>
 <body>
 
-<vue-durban-button btntext="Test Button" color="red"></vue-durban-button>
-<vue-durban-text-field placeholder="test" :rules="[(value) => !!value || 'Required.']"></vue-durban-text-field>
+<div class="container">
+    <vue-durban-button btntext="Test Button" color="red"></vue-durban-button>
+    <vue-durban-text-field placeholder="test" :rules="[(value) => !!value || 'Required.']"></vue-durban-text-field>
+</div>
 
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/vuetify"></script>
