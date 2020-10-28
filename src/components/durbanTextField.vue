@@ -1,10 +1,12 @@
 <template>
-  <v-text-field
-      v-bind="parentAttrs"
-      :value="value"
-      :rules="validationRules"
-      @input="$emit('input', $event)"
-  ></v-text-field>
+  <div class="v-application v-application--is-ltr" id="app" data-app="true">
+    <v-text-field
+        v-bind="parentAttrs"
+        :value="value"
+        :rules="validationRules"
+        @input="$emit('input', $event)"
+    ></v-text-field>
+  </div>
 </template>
 
 <script>
@@ -43,7 +45,11 @@ export default {
   methods: {
     findObjectInString(string, key) {
       const search = new RegExp(key, 'i')
-      const result = string.find(v => search.test(v)).split(':')
+      const find   = string.find(v => search.test(v))
+      const result = find ? find.split(':') : false
+
+      console.log(result)
+      if (!result) return result
 
       return {key: result[0].trim(), value: result[1]}
     }
@@ -51,10 +57,12 @@ export default {
   computed: {
     validationRules() {
       if (!this.parentAttrs.find(v => v.validation)) return;
+      console.log(this.parentAttrs.find(v => v.validation))
 
       const rules            = []
       const validationObject = this.parentAttrs.find(v => v.validation)
-      const validationArray  = validationObject.validation.split(',').map(v => v.trim())
+      console.log(validationObject)
+      const validationArray = validationObject.validation.split(',').map(v => v.trim())
       // const validation = this.$props.validation.split(',') // For local Testing
 
       console.log('validation', validationArray)
@@ -81,3 +89,13 @@ export default {
   }
 };
 </script>
+<style lang="css">
+
+/* Overwritting wrong generated text-field-label style by vuetify */
+
+.v-label {
+  left: 0px !important;
+  right: auto !important;
+  position: absolute !important;
+}
+</style>
