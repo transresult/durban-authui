@@ -1,7 +1,7 @@
 <template>
   <v-text-field
       v-bind="parentAttrs"
-      :value="value"
+      :value="input"
       :rules="validationRules"
       @input="$emit('input', $event)"
   ></v-text-field>
@@ -18,8 +18,9 @@
 //        dieses Verhaltne kann mit inheritAttrs=false deaktivert werdne (https://vuejs.org/v2/api/#inheritAttrs)
 export default {
   props: {
-    value: {
-      type: String
+    input: {
+      type: String,
+      default: ''
     },
     validation: String
   },
@@ -49,25 +50,27 @@ export default {
   },
   computed: {
     validationRules() {
-      const rules      = []
-      const validation = this.parentAttrs.find(v => v.validation)
+      if (!this.parentAttrs.find(v => v.validation)) return;
+
+      const rules            = []
+      const validationObject = this.parentAttrs.find(v => v.validation)
+      const validationArray  = validationObject.validation.split(',').map(v => v.trim())
       // const validation = this.$props.validation.split(',') // For local Testing
 
-      if (!validation) return;
-      console.log(validation)
-      validation.find(v => v == "required") ? rules.push(this.rules.required) : null
-      validation.find(v => v == "email") ? rules.push(this.rules.email) : null
-      validation.find(v => v == "numberonly") ? rules.push(this.rules.numberonly) : null
-      validation.find(v => v == "stringonly") ? rules.push(this.rules.stringonly) : null
+      console.log('validation', validationArray)
+      validationArray.find(v => v == "required") ? rules.push(this.rules.required) : null
+      validationArray.find(v => v == "email") ? rules.push(this.rules.email) : null
+      validationArray.find(v => v == "numberonly") ? rules.push(this.rules.numberonly) : null
+      validationArray.find(v => v == "stringonly") ? rules.push(this.rules.stringonly) : null
 
-      const maxlen = this.findObjectInString(validation, 'maxlen')
+      const maxlen = this.findObjectInString(validationArray, 'maxlen')
       if (maxlen) {
         this.maxlen        = parseInt(maxlen.value)
         this.rules.counter = true
         rules.push(this.rules.maxLength)
       }
 
-      console.log(rules)
+      console.log("rules", rules)
       return rules
     }
   },
