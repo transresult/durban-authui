@@ -1,7 +1,7 @@
 <template>
   <v-text-field
       v-bind="parentAttrs"
-      :value="input"
+      :value="value"
       :rules="validationRules"
       @input="$emit('input', $event)"
   ></v-text-field>
@@ -18,7 +18,7 @@
 //        dieses Verhaltne kann mit inheritAttrs=false deaktivert werdne (https://vuejs.org/v2/api/#inheritAttrs)
 export default {
   props: {
-    input: {
+    value: {
       type: String,
       default: ''
     },
