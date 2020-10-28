@@ -1,6 +1,7 @@
 <template>
   <div class="v-application v-application--is-ltr" id="app" data-app="true">
     <v-text-field
+        id="durbanTextField"
         v-bind="parentAttrs"
         :value="value"
         :rules="validationRules"
@@ -93,8 +94,8 @@ export default {
 
 /* Overwritting wrong generated text-field-label style by vuetify */
 
-.v-label {
-  left: 0px !important;
+#durbanTextField .v-label {
+  left: 0 !important;
   right: auto !important;
   position: absolute !important;
 }
