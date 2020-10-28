@@ -26,7 +26,7 @@ export default {
   mounted() {
     let parentElAttrs = this.$el.parentElement.attributes
     this.parentAttrs  = Object.entries(parentElAttrs).map(item => ({[item[1].name]: item[1].value}))
-    console.log("parentAttrs", this.parentAttrs)
+    // console.log("parentAttrs", this.parentAttrs)
   }
 }
 </script>

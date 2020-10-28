@@ -15,13 +15,15 @@
 <body>
 
 <div class="container">
-    <vue-durban-button btntext="Test Button" color="red"></vue-durban-button>
-    <vue-durban-text-field placeholder="test" :rules="[(value) => !!value || 'Required.']"></vue-durban-text-field>
+    <vue-durban-text-field
+            placeholder="test"
+            validation="[{required: true}, {maxlen: 25}, {numberonly: true}]">
+    </vue-durban-text-field>
 </div>
 
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/vuetify"></script>
-<script src="../dist/durban-authui.umd.js"></script>
+<script src="../dist-dev/durban-authui.umd.js"></script>
 
 </body>
 </html>

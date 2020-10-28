@@ -6,7 +6,7 @@
                      block small
                      postbackurl='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("mp$ContentZone$ctl49", "", false, "", "/editor/pageitem/new/0/default/", false, true))'
                      color="error"/>
-      <durban-text-field value="" color="green" placeholder="test"/>
+      <durban-text-field value="" color="green" placeholder="test" validation="required, maxlen: 7, stringonly"/>
     </v-main>
   </v-app>
 </template>
