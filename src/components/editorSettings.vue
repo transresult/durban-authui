@@ -173,6 +173,7 @@ export default {
     dialogUrl: "",
     dialogTitle: "",
     checkbox: true,
+    radioGroup: 0,
   })
 }
 
@@ -192,4 +193,10 @@ export default {
   margin: auto;
   /*margin: 0 auto;*/
 }
+
+.v-text-field .v-label {
+  left: 0px !important;
+  right: auto !important;
+}
+
 </style>

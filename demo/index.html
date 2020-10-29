@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
-    <!--    <link href="../dist/durban-authui.css" rel="stylesheet">-->
+    <link href="../dist/durban-authui.css" rel="stylesheet">
     <!--    <link href="http://www.kbv-beschlaege.de.stage4.trbs.biz/App_Themes/2009-kbv-kd-v2/styles.min.css" rel="stylesheet">-->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 
@@ -15,15 +15,19 @@
 <body>
 
 <div class="container">
-    <vue-durban-text-field
-            label="Titel der Website"
-            value="Firmenname | Das Besondere"
-            validation="required, stringonly">
-    </vue-durban-text-field>
+    <!--        <vue-durban-text-field-->
+    <!--                label="Titel der Website"-->
+    <!--                value="Firmenname | Das Besondere"-->
+    <!--                validation="required, stringonly">-->
+    <!--        </vue-durban-text-field>-->
+
+    <vue-editor-settings></vue-editor-settings>
+
+    <!--    <vuetify-nav-drawer></vuetify-nav-drawer>-->
 </div>
 
-<script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/vuetify"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
 <script src="../dist-dev/durban-authui.umd.js"></script>
 
 </body>
